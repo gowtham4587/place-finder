@@ -12,15 +12,7 @@ const updateHistory = (selectedCountry) => {
     }
 };
 
-const loadCountryList = (countryList) => {
-    return {
-        type: "LOAD_COUNTRY_LIST",
-        countryList: countryList
-    }
-};
-
 export default {
     updateInfo,
-    updateHistory,
-    loadCountryList
+    updateHistory
 }

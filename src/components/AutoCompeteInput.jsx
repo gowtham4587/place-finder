@@ -4,20 +4,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import mapActions from '../actions/mapActions';
 import { checkEmpty } from '../utils/placeMapUtils';
 import COUNTRY_LIST from '../mock-data/countryList';
-import { updateCountryInfo, loadCountryList } from '../reducers/placeMapReducer';
+import { updateCountryInfo, getCountryListFromServer } from '../reducers/placeMapReducer';
 import { SearchOutlined, HistoryOutlined } from '@ant-design/icons';
 import MapHistory from './mapHistoryModal';
 
 export default function AutoCompleteInput(props) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch();    
     const [country, setCountry] = useState(null);
     const [searchList, setSearchList] = useState([]);
-    const curState = useSelector((state)=>state);
-    const countryList = useSelector((state) => state.placeMap.countryList);    
-    const count = useSelector((state) => state.placeMap.countryList);
+    const countryList = useSelector((state) => state.placeMap.countryList);
     const countryInfo = useSelector((state) => state.placeMap.selectedCountry);
     const [showHistory, setShowHistory] = useState(false);
     
+    //Handler for country search by typing string
     const handleSearchCountry = (value: string) => {
         if(checkEmpty(value)){
             setSearchList([]);
@@ -32,9 +31,7 @@ export default function AutoCompleteInput(props) {
         });
         setSearchList(filteredList);
     };
-    const handleConutrySelection = (value)=>{
-        setCountry(value);
-    };
+    //Event for onchange value of search key
     const handleChangeSearch = (value, selectedObj)=>{
         setCountry(value);
         if(!checkEmpty(selectedObj)){ 
@@ -50,16 +47,15 @@ export default function AutoCompleteInput(props) {
     const closeHistoryModal =()=> {
         setShowHistory(false);
     };
-    useEffect(()=>{        
-        dispatch(loadCountryList(mapActions.loadCountryList(COUNTRY_LIST)));
-    },[]);
+    useEffect(()=>{       
+        dispatch(getCountryListFromServer());
+    },[dispatch]);
     return(
         <div>             
            <AutoComplete
                 style={{ width: 300, margin:"20px 0px" }}
                 options={searchList}
                 onSearch={handleSearchCountry}
-                onSelect={handleConutrySelection}
                 onChange={handleChangeSearch}
                 value={country}
                 placeholder="Type your country to search"
@@ -80,7 +76,7 @@ export default function AutoCompleteInput(props) {
                 <Descriptions.Item label="Longitude">{countryInfo.longitude}</Descriptions.Item>
                 </Descriptions>
             </Typography>
-            <Divider style={{borderWidth:"5px"}}></Divider>
+            <Divider style={{borderWidth:"5px", borderColor:"#CDCDCD"}}></Divider>
             <MapHistory 
                 open={showHistory}
                 onOk={closeHistoryModal}
