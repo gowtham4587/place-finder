@@ -17,7 +17,7 @@ export default function AutoCompleteInput(props) {
     const [showHistory, setShowHistory] = useState(false);
     
     //Handler for country search by typing string
-    const handleSearchCountry = (value: string) => {
+    const handleSearchCountry = (value) => {
         if(checkEmpty(value)){
             setSearchList([]);
             return;
