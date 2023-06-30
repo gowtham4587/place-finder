@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Component } from 'react';
+import React from 'react';
 import AutoCompleteInput from './components/AutoCompeteInput';
 import MapComponent from './components/MapComponent';
 import { Col, Divider, Row, Typography } from 'antd';

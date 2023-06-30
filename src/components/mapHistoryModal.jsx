@@ -1,8 +1,7 @@
 import { Button, Divider, Modal, Typography } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Space, Table, Tag } from 'antd';
-import { Data } from '@react-google-maps/api';
+import { Table } from 'antd';
 const { Column} = Table;
 export default function MapHistory(props) { 
     const mapHistoryList = useSelector((state) => state.placeMap.mapHistory);

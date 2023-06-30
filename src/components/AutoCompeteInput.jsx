@@ -1,11 +1,10 @@
-import { AutoComplete,Button,Descriptions, Divider, Input, Modal, Typography } from 'antd';
-import React, { useEffect, useReducer, useState } from 'react';
+import { AutoComplete,Button,Descriptions, Divider, Typography } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import mapActions from '../actions/mapActions';
 import { checkEmpty } from '../utils/placeMapUtils';
-import COUNTRY_LIST from '../mock-data/countryList';
 import { updateCountryInfo, getCountryListFromServer } from '../reducers/placeMapReducer';
-import { SearchOutlined, HistoryOutlined } from '@ant-design/icons';
+import { HistoryOutlined } from '@ant-design/icons';
 import MapHistory from './mapHistoryModal';
 
 export default function AutoCompleteInput(props) {
